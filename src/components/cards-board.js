@@ -4,15 +4,45 @@ import './cards-board.css';
 
 class CardsBoard extends Component {
 
-    checkOpenCards = (cardName, callback) => {
-        this.props.cards.forEach(card => {
-            if (card.isOpen) {
-                if (card.name === cardName) {
-                    console.log(card.name)
-                    callback()
+    state = {
+        toCompare: [], // [{id: "",name: "", timerId: "" }]
+        opened: 0
+    }
+
+    checkOpenCards = () => {
+        //Compare both open cards
+        if ((this.state.toCompare[0].name !== this.state.toCompare[1].name)) {
+            setTimeout(() => {
+                this.state.toCompare.forEach(card => {
+                    this.props.changeOpenState(false, card.id);
+                })
+                
+                this.setState({toCompare: [], opened: this.state.opened - 2});
+                
+            },2000)
+            return;
+        }
+        this.setState({toCompare: []});
+    }
+
+    flipCard = (selectedCardId,name,isOpen) => {
+        if (isOpen) return;
+        if (this.state.toCompare.length < 2) {
+            this.props.changeOpenState(true, selectedCardId);
+            
+            this.setState(
+                {
+                    toCompare: [...this.state.toCompare, {id:selectedCardId, name: name}],
+                    opened: this.state.opened + 1
+                }, 
+                () => {
+                    
+                    if (this.state.toCompare.length === 2) {
+                        this.checkOpenCards();  
+                    }
                 }
-            }
-        })
+            );
+        }
     }
 
     render () {
@@ -28,6 +58,7 @@ class CardsBoard extends Component {
                         check={this.checkOpenCards}
                         isOpen={card.isOpen}
                         changeOpenState={changeOpenState}
+                        flipCard={this.flipCard}
                     />
                 </div>
                 )

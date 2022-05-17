@@ -22,7 +22,7 @@ class Board extends Component {
 
     changeOpenState = (isOpen, id) => {
         const updatedCards = this.state.cards.map(card => {
-            console.log(id, isOpen)
+           
             if (card.id === id) {
                 card.isOpen = isOpen;
             }
