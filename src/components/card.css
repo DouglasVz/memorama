@@ -1,0 +1,38 @@
+.card {
+    position: relative;
+    width: 95%;
+    height: 95%;
+    
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+
+.card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: blue;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 3em
+}
+
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: rgb(255, 255, 255);
+    transform: rotateY(180deg);
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

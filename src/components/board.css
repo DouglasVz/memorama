@@ -1,0 +1,14 @@
+.board {
+    border-radius: 1rem;
+    max-width: 1200px;
+    width: 60%;
+    height: 90%;
+    background: #eeee;
+}
+
+@media (max-width: 1000px) {
+    .board {
+        width: 95%;
+    }
+}
+
