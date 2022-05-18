@@ -26,6 +26,7 @@ class CardsBoard extends Component {
     }
 
     flipCard = (selectedCardId,name,isOpen) => {
+        if(!this.props.run)return
         if (isOpen) return;
         if (this.state.toCompare.length < 2) {
             this.props.changeOpenState(true, selectedCardId);
@@ -46,8 +47,7 @@ class CardsBoard extends Component {
     }
 
     render () {
-        const {cards, levelUp, changeOpenState} = this.props;
-        
+        const {cards, levelUp, changeOpenState, showCards} = this.props;
         return (
             <div className="cards-board">{
                 cards.map((card,index) => <div key={index} className="card-cont">
@@ -56,7 +56,7 @@ class CardsBoard extends Component {
                         name={card.name}
                         levelUp={levelUp}
                         check={this.checkOpenCards}
-                        isOpen={card.isOpen}
+                        isOpen={showCards?true:card.isOpen}
                         changeOpenState={changeOpenState}
                         flipCard={this.flipCard}
                     />
