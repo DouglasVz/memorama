@@ -5,12 +5,12 @@ import CountDown from "./counter";
 class ControlBar extends Component {
 
     render() {
-        const {start, run, maxTime} = this.props;
+        const {start, run, maxTime, timeOver} = this.props;
         return (
             <div className="control-bar-container">
                 <div className="control-bar">
                     <h2>Level 1</h2>
-                    <CountDown maxTime={maxTime}/>
+                    {run?<CountDown maxTime={maxTime} timeOver={timeOver}/>:<h1>00:00</h1>}
                     <button className="start-restart-btn" onClick={start}>{run?'Stop':'Start'}</button>
                 </div>
             </div>

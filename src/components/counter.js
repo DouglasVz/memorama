@@ -1,23 +1,16 @@
 import React, {Component} from "react";
 
 class CountDown extends Component {
-    
 
     state = {
         time: this.props.maxTime * 60
         
     }
 
-    minutes =  Math.floor(this.state.time / 60)
-    seconds = this.state.time % 60
-
     countDown = () => {
         this.timer = setInterval(() => {
             this.setState({
                 time: this.state.time - 1
-            }, () => {
-                this.minutes =  Math.floor(this.state.time / 60)
-                this.seconds = this.state.time % 60
             })
             
         },1000)  
@@ -27,9 +20,10 @@ class CountDown extends Component {
     render() {
         return (
             <div>
-                <h1>{this.minutes}:{this.seconds}</h1>
+                {<h1>{Math.floor(this.state.time / 60)}:{this.state.time % 60}</h1>}
             </div>
         )
+
     }
 
     componentDidMount() {
@@ -38,15 +32,13 @@ class CountDown extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
-        
-        if ( this.state.time <= 50) {
-            console.log('la pu')
+        if ( this.state.time === 0) {
             clearInterval(this.timer);
+            this.props.timeOver();
         }
     }
 
     componentWillUnmount() {
-        console.log('la chic')
         clearInterval(this.timer);
     }
  

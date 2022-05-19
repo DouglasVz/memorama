@@ -39,7 +39,16 @@ class Board extends Component {
             return card;
         });
         this.setState({cards: cardsReset ,showCards:false, run: false});
-        
+    }
+
+    timeOver = () => {
+        alert('The time is over')
+        //STOP
+        let cardsReset = this.state.cards.map(card => {
+            card.isOpen = false;
+            return card;
+        });
+        this.setState({cards: cardsReset ,showCards:false, run: false});
     }
 
     changeOpenState = (isOpen, id) => {
@@ -61,7 +70,8 @@ class Board extends Component {
                 <ControlBar level={3000}
                     start={this.startStop}
                     run={this.state.run}
-                    maxTime={1}
+                    maxTime={this.maxTime}
+                    timeOver={this.timeOver}
                 />
                 <CardsBoard 
                     cards={this.state.cards} 

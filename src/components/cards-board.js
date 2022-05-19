@@ -66,6 +66,7 @@ class CardsBoard extends Component {
             </div>
         )
     }
+
 }
 
 export default CardsBoard;
