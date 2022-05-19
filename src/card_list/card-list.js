@@ -61,7 +61,7 @@ let items = [
     }
 ]
 
-function cards (cards) {
+let cards =  (cards) => {
     
     cards.map((card,index) => {
         let duplicate = {
@@ -75,7 +75,10 @@ function cards (cards) {
     });
     
     cards = cards.sort((a,b) => {return 0.5 - Math.random()})
+
 }
 cards(items);
+
+
 
 export default items;

@@ -9,7 +9,12 @@ class CardsBoard extends Component {
         opened: 0
     }
 
+    clearState = () => {
+        this.setState({toCompare: [], opened: 0});
+    }
+
     checkOpenCards = () => {
+        
         //Compare both open cards
         if ((this.state.toCompare[0].name !== this.state.toCompare[1].name)) {
             setTimeout(() => {
@@ -19,10 +24,17 @@ class CardsBoard extends Component {
                 
                 this.setState({toCompare: [], opened: this.state.opened - 2});
                 
-            },2000)
+            },1000)
             return;
         }
-        this.setState({toCompare: []});
+        this.setState({toCompare: []}, () => {
+            //Check if all cards are open
+            if (this.state.opened === this.props.cardsQuantity) {
+                this.props.win()
+                return;
+            }
+        });
+        
     }
 
     flipCard = (selectedCardId,name,isOpen) => {
@@ -48,6 +60,7 @@ class CardsBoard extends Component {
 
     render () {
         const {cards, levelUp, changeOpenState, showCards} = this.props;
+        
         return (
             <div className="cards-board">{
                 cards.map((card,index) => <div key={index} className="card-cont">
@@ -65,6 +78,18 @@ class CardsBoard extends Component {
             }
             </div>
         )
+    }
+
+    componentDidMount() { 
+        if (!this.componentIsMount){
+            this.props.passClearStateFunc(this.clearState);
+            this.componentIsMount = true
+        }
+        
+    }
+
+    componentWillUnmount() {
+        
     }
 
 }

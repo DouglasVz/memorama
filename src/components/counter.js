@@ -35,6 +35,10 @@ class CountDown extends Component {
         if ( this.state.time === 0) {
             clearInterval(this.timer);
             this.props.timeOver();
+            return;
+        }
+        if (this.props.pause) {
+            clearInterval(this.timer);
         }
     }
 
