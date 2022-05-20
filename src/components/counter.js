@@ -32,7 +32,7 @@ class CountDown extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
-        if ( this.state.time === 0) {
+        if (prevState.time !== this.state.time && this.state.time === 0) {
             clearInterval(this.timer);
             this.props.timeOver();
             return;
@@ -41,6 +41,7 @@ class CountDown extends Component {
             clearInterval(this.timer);
         }
     }
+
 
     componentWillUnmount() {
         clearInterval(this.timer);

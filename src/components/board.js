@@ -3,21 +3,26 @@ import './board.css';
 import CardsBoard from "./cards-board";
 import items from "../card_list/card-list";
 import ControlBar from "./control-bar";
-
+import Modal from './modal';
 
 
 
 class Board extends Component {
-    
     levels = [3000,2000,1000,500];
-    maxTime = 3;
-    clearChildState = null; //Here
+    maxTime = 0.1;
+    clearChildState = null; //Here will be assigned clearChildState function
     state = {
         cards: items,
         level: 0,
         showCards: false,
         run: false,
-        pause: false
+        pause: false,
+        modal: {
+            active: false,
+            text: '',
+            buttonText: '',
+            toggle: () => {}
+        }
     }
 
     assignClearChildState = (childClearStateFunc) => {
@@ -35,7 +40,18 @@ class Board extends Component {
             card.isOpen = false;
             return card;
         });
-        this.setState({cards: this.reorderCards(cardsReset) ,showCards:false, run: false, pause: false});
+        this.setState({
+            cards: this.reorderCards(cardsReset),
+            showCards:false, 
+            run: false, 
+            pause: false,
+            modal: {
+                active: false,
+                text: '',
+                buttonText:'',
+                toggle: () => {}
+            }
+        });
         //Clear child state
         this.clearChildState();
         
@@ -59,12 +75,6 @@ class Board extends Component {
         this.stopGame();
     }
 
-    timeOver = () => {
-        alert('The time is over')
-        //STOP
-        this.stopGame();
-    }
-
     changeOpenState = (isOpen, id) => {
         const updatedCards = this.state.cards.map(card => {
            
@@ -78,9 +88,32 @@ class Board extends Component {
     }
 
     win = () => {
-        this.props.modal("You win!");
         this.setState({
-            pause: true
+            pause: true,
+            modal: {
+                active: true,
+                text: "Level " + this.state.level + " completed",
+                buttonText: 'Next',
+                toggle: () => {
+                    this.stopGame();
+                }
+            }
+            
+        })
+    }
+
+    timeOver = () => {
+        this.setState((state) => { 
+            return {
+                modal: {
+                    active: true,
+                    text: "Time is over :(",
+                    buttonText: 'Close',
+                    toggle: () => {
+                        this.stopGame();
+                    }
+                }
+            }
         })
     }
 
@@ -106,6 +139,9 @@ class Board extends Component {
                     passClearStateFunc={this.assignClearChildState}
                     win={this.win}
                 />
+                <Modal active={this.state.modal.active} toggle={this.state.modal.toggle} buttonText={this.state.modal.buttonText}>
+                    <h1>{this.state.modal.text}</h1>
+                </Modal>
             </div>
         )
     }

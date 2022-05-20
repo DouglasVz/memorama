@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Card from "./card";
 import './cards-board.css';
 
+
 class CardsBoard extends Component {
 
     state = {

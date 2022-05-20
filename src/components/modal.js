@@ -1,14 +1,21 @@
 import React, {Component} from "react";
+import Portal from '../portal';
 import './modal.css';
 
 class Modal extends Component {
-    
+
     render() {
+        const {children, toggle, active, buttonText} = this.props;
         return (
-            <div className="modal">
-                <h1>You win!</h1>
-                <button className="action-btn">NEXT</button>
-            </div>
+            <Portal>
+                {active && (
+                    <div className="modal">
+                        <div>{children}</div>
+                        <button className="action-btn" onClick={toggle}>{buttonText}</button>
+                    </div>
+                    ) 
+                }
+            </Portal>
         )
     }
 }
