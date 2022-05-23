@@ -9,10 +9,13 @@ class Modal extends Component {
         return (
             <Portal>
                 {active && (
-                    <div className="modal">
-                        <div>{children}</div>
-                        <button className="action-btn" onClick={toggle}>{buttonText}</button>
-                    </div>
+                    <>
+                        <div className="overlay"></div>
+                        <div className="modal">
+                            <div>{children}</div>
+                            <button className="action-btn" onClick={toggle}>{buttonText}</button>
+                        </div>
+                    </>
                     ) 
                 }
             </Portal>

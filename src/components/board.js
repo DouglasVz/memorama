@@ -8,12 +8,13 @@ import Modal from './modal';
 
 
 class Board extends Component {
-    levels = [3000,2000,1000,500];
-    maxTime = 0.1;
+    
+    maxLevel = 3;
+    level= 1;
+    maxTime = 3;
     clearChildState = null; //Here will be assigned clearChildState function
     state = {
         cards: items,
-        level: 0,
         showCards: false,
         run: false,
         pause: false,
@@ -30,12 +31,16 @@ class Board extends Component {
     }
 
 
-    levelUp = (level) => {
-        this.setState({level: level + 1})
-        return this.state.level;
+    levelUp = () => {
+        this.level += 1;
+        this.maxTime -= 1;
     }
 
     stopGame = () => {
+        if (this.level === this.maxLevel) {
+            this.level = 1;
+            this.maxTime = 3;
+        }
         let cardsReset = this.state.cards.map(card => {
             card.isOpen = false;
             return card;
@@ -88,17 +93,34 @@ class Board extends Component {
     }
 
     win = () => {
+        if (this.level === this.maxLevel) {
+            this.setState({
+                pause: true,
+                modal: {
+                    active: true,
+                    text: "Congratulation! Missión completed",
+                    buttonText: 'Close',
+                    toggle: () => {
+                        this.stopGame();
+                        
+                    }
+                }
+            })
+            return
+        }
         this.setState({
             pause: true,
             modal: {
                 active: true,
-                text: "Level " + this.state.level + " completed",
+                text: "Level " + this.level + " completed",
                 buttonText: 'Next',
                 toggle: () => {
                     this.stopGame();
+                    //Next level
+                    this.levelUp();
+                    
                 }
             }
-            
         })
     }
 
@@ -121,16 +143,16 @@ class Board extends Component {
 
         return (
             <div className="board">
-                <ControlBar level={3000}
+                <ControlBar
                     start={this.startStop}
                     run={this.state.run}
                     maxTime={this.maxTime}
                     timeOver={this.timeOver}
                     pause={this.state.pause}
+                    level={this.level}
                 />
                 <CardsBoard 
                     cards={this.state.cards} 
-                    level={this.levels[this.state.level]}
                     cardsQuantity = {this.state.cards.length}
                     levelUp={this.levelUp}
                     changeOpenState={this.changeOpenState}
@@ -140,7 +162,7 @@ class Board extends Component {
                     win={this.win}
                 />
                 <Modal active={this.state.modal.active} toggle={this.state.modal.toggle} buttonText={this.state.modal.buttonText}>
-                    <h1>{this.state.modal.text}</h1>
+                    <h1 style={{textAlign:'center'}}>{this.state.modal.text}</h1>
                 </Modal>
             </div>
         )

@@ -25,7 +25,7 @@ class CardsBoard extends Component {
                 
                 this.setState({toCompare: [], opened: this.state.opened - 2});
                 
-            },1000)
+            },500)
             return;
         }
         this.setState({toCompare: []}, () => {

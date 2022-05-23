@@ -1,61 +1,61 @@
 let items = [
     {
         "id":0,
-        "name": "Perro",
+        "name": "Dog",
         "photo": "",
         "isOpen": false
     },
     {
         "id":1,
-        "name": "Gato",
+        "name": "Cat",
         "photo": "",
         "isOpen": false
     },
     {
         "id":2,
-        "name": "Víbora",
+        "name": "Snake",
         "photo": "",
         "isOpen": false
     },
     {
         "id":3,
-        "name": "Águila",
+        "name": "Eagle",
         "photo": "",
         "isOpen": false
     },
     {
         "id":4,
-        "name": "Ardilla",
+        "name": "Squirrell",
         "photo": "",
         "isOpen": false
     },
     {
         "id":5,
-        "name": "Gusano",
+        "name": "Mouse",
         "photo": "",
         "isOpen": false
     },
     {
         "id":6,
-        "name": "Oso",
+        "name": "Bear",
         "photo": "",
         "isOpen": false
     },
     {
         "id":7,
-        "name": "Abeja",
+        "name": "Bee",
         "photo": "",
         "isOpen": false
     },
     {
         "id":8,
-        "name": "Cabra",
+        "name": "Goat",
         "photo": "",
         "isOpen": false
     },
     {
         "id":9,
-        "name": "Tiburón",
+        "name": "Shark",
         "photo": "",
         "isOpen": false
     }

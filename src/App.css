@@ -1,6 +1,6 @@
 .app {
   height: 100vh;
-  background: #3d0158;
+  background:  linear-gradient(#3d0158, #b598be);
   display: flex;
   justify-content: center;
   align-items: center;
