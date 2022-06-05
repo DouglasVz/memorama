@@ -12,8 +12,8 @@ class Card extends Component {
 
         return (
             <div className="card" style={this.rotate(isOpen)} onClick={flipCard.bind(this,id,name,isOpen)}>
-                <div className="card-front">?</div>
-                <div className="card-back">{name}</div>
+                <div className="card-front"><h1>?</h1></div>
+                <div className="card-back"><h2>{name}</h2></div>
             </div>
         )
     }

@@ -10,6 +10,7 @@
 @media (max-width: 1000px) {
     .board {
         width: 95%;
+        height: 60%;
     }
 }
 
