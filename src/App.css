@@ -5,3 +5,28 @@
   justify-content: center;
   align-items: center;
 }
+
+.back-portfolio {
+  color: white;
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 2rem;
+  background: #b598be;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.back-portfolio:hover {
+  transition: background-color .3s ease-out;
+  background-color: #e9d2f0;
+}
+
+@media (max-width: 1000px) {
+  .back-portfolio {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    margin: 1rem;
+  }
+}
